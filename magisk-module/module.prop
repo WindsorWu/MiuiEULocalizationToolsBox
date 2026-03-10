@@ -1,6 +1,6 @@
 id=miuieulocalization
 name=MIUI EU Localization (HyperOS)
-version=OS2.0.213.0.VMNCNXM
-versionCode=213000
+version=OS3.0.4.0.VMNCNXM
+versionCode=304000
 author=Maintainer
 description=Localization tools and fixes for MIUI EU / HyperOS. Sets ro.miui.EULocalization for Toolbox matching.

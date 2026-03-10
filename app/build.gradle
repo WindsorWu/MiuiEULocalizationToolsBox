@@ -10,8 +10,8 @@ android {
         applicationId "moe.minamigo.MiuiEuLocalization"
         minSdkVersion 23
         targetSdkVersion 35
-        versionCode 213000
-        versionName "OS2.0.213.0.VMNCNXM"
+        versionCode 304000
+        versionName "OS3.0.4.0.VMNCNXM"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

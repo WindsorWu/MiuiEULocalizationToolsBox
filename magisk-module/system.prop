@@ -1,2 +1,10 @@
-ro.miui.EULocalization=OS2.0.213.0.VMNCNXM
+ro.miui.EULocalization=OS3.0.4.0.VMNCNXM
+ro.se.type=eSE,HCE,UICC
+ro.miui.mcc=9460
+ro.vendor.audio.aiasst.support=true
+persist.vendor.vcb.enable=true
+persist.vendor.vcb.ability=true
+ro.product.mod_device=xiaomieu
+ro.miui.region=CN
 
+moe.minamigo.miuieulocalization=OS3.0.4.0.VMNCNXM

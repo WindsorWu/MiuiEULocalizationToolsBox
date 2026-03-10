@@ -5,10 +5,16 @@ import java.io.File;
 import dalvik.system.DexFile;
 
 public class SystemPropertiesProxy {
+    private static final String SYSTEM_PROPERTIES_CLASS = "android.os.SystemProperties";
+
+    private static Object call(String methodName, Class<?>[] parameterTypes, Object... args) throws Exception {
+        Class<?> systemProperties = Class.forName(SYSTEM_PROPERTIES_CLASS);
+        return systemProperties.getMethod(methodName, parameterTypes).invoke(null, args);
+    }
+
     public static String get(Context context, String key) throws IllegalArgumentException {
         try {
-            Class SystemProperties = context.getClassLoader().loadClass("android.os.SystemProperties");
-            return (String) SystemProperties.getMethod("get", String.class).invoke(SystemProperties, new String(key));
+            return (String) call("get", new Class[]{String.class}, key);
         } catch (IllegalArgumentException iAE) {
             throw iAE;
         } catch (Exception e) {
@@ -18,8 +24,7 @@ public class SystemPropertiesProxy {
 
     public static String get(Context context, String key, String def) throws IllegalArgumentException {
         try {
-            Class SystemProperties = context.getClassLoader().loadClass("android.os.SystemProperties");
-            return (String) SystemProperties.getMethod("get", String.class, String.class).invoke(SystemProperties, new String(key), new String(def));
+            return (String) call("get", new Class[]{String.class, String.class}, key, def);
         } catch (IllegalArgumentException iAE) {
             throw iAE;
         } catch (Exception e) {
@@ -28,10 +33,8 @@ public class SystemPropertiesProxy {
     }
 
     public static Integer getInt(Context context, String key, int def) throws IllegalArgumentException {
-        Integer.valueOf(def);
         try {
-            Class SystemProperties = context.getClassLoader().loadClass("android.os.SystemProperties");
-            return (Integer) SystemProperties.getMethod("getInt", String.class, Integer.TYPE).invoke(SystemProperties, new String(key), new Integer(def));
+            return (Integer) call("getInt", new Class[]{String.class, Integer.TYPE}, key, def);
         } catch (IllegalArgumentException iAE) {
             throw iAE;
         } catch (Exception e) {
@@ -40,10 +43,8 @@ public class SystemPropertiesProxy {
     }
 
     public static Long getLong(Context context, String key, long def) throws IllegalArgumentException {
-        Long.valueOf(def);
         try {
-            Class SystemProperties = context.getClassLoader().loadClass("android.os.SystemProperties");
-            return (Long) SystemProperties.getMethod("getLong", String.class, Long.TYPE).invoke(SystemProperties, new String(key), new Long(def));
+            return (Long) call("getLong", new Class[]{String.class, Long.TYPE}, key, def);
         } catch (IllegalArgumentException iAE) {
             throw iAE;
         } catch (Exception e) {
@@ -52,10 +53,8 @@ public class SystemPropertiesProxy {
     }
 
     public static Boolean getBoolean(Context context, String key, boolean def) throws IllegalArgumentException {
-        Boolean.valueOf(def);
         try {
-            Class SystemProperties = context.getClassLoader().loadClass("android.os.SystemProperties");
-            return (Boolean) SystemProperties.getMethod("getBoolean", String.class, Boolean.TYPE).invoke(SystemProperties, new String(key), new Boolean(def));
+            return (Boolean) call("getBoolean", new Class[]{String.class, Boolean.TYPE}, key, def);
         } catch (IllegalArgumentException iAE) {
             throw iAE;
         } catch (Exception e) {
@@ -67,8 +66,7 @@ public class SystemPropertiesProxy {
         try {
             new DexFile(new File("/system/app/Settings.apk"));
             context.getClassLoader();
-            Class SystemProperties = Class.forName("android.os.SystemProperties");
-            SystemProperties.getMethod("set", String.class, String.class).invoke(SystemProperties, new String(key), new String(val));
+            call("set", new Class[]{String.class, String.class}, key, val);
         } catch (IllegalArgumentException iAE) {
             throw iAE;
         } catch (Exception e) {
